@@ -1,0 +1,59 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int reverse(int balls[], int lenght, int index);
+    
+int main() {
+    int cases;
+    cin >> cases;
+    
+    // sanity check
+    if (cases <= 0) return 0;
+    
+    int n_balls[cases];
+    int k_index[cases];
+    
+    // user input
+    for (int i = 0 ; i < cases ; i++)
+    {
+        cin >> n_balls[i];
+        cin >> k_index[i];
+    }
+   
+    // arrays filling
+    for (int i = 0 ; i < cases ; i++)
+    {
+        int balls_array[cases][n_balls[i]];
+        
+        // array fill
+        for (int j = 0 ; j < n_balls[i] ; j++)
+        {
+            balls_array[ i ][ j ] = j;
+        }
+        
+        int result = reverse( balls_array[i], n_balls[i], k_index[i]);
+        
+        cout << result << "\n";
+    }
+        
+    return 0;
+}
+
+int reverse(int balls[], int lenght, int index)
+{
+    int temp[lenght];
+    
+    for (int i = 0 ; i < lenght - 1  ; i++ )
+    {
+        for (int j = lenght, k = i ; k < j ; k++, j--)
+        {
+             temp[j] = balls[k];
+        }
+    }
+    return temp[index - 1];
+    
+}

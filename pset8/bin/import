@@ -1,0 +1,83 @@
+#!/usr/bin/env php
+<?php
+
+    include("../includes/functions.php");
+    
+    if ($argc !== 2)
+    {
+        echo("Argument missing: Path to .txt\n\n");    
+    }
+    
+    else
+    {
+        // get filename from command line
+        $filename = $argv[1];
+        
+        // checks if file exists 
+        if (!file_exists($filename))
+        {
+            exit("File error: Please control path and filetype.\n\n");
+        }
+        // checks if file readable 
+        elseif (!is_readable($filename))
+        {
+            exit("File not readable: Please check file .\n\n");
+        }
+        elseif (!stristr($filename, ".txt") && !stristr($filename, ".cvs"))
+        {
+            exit("Only .txt and .cvs accepted!\n\n");
+        }
+        
+        // TODO checks if CSV format and cols 12
+        
+        else
+        {
+            import($filename);
+        }
+           
+    }
+    
+    
+    function import($filename)
+    {
+        // opens file
+        ini_set("auto_detect_line_endings", true);
+        $file = fopen($filename, "r");
+    
+        // declares variables for fgetcsv
+        $delimite = "\t";
+        $enclosure = "\0";
+        $escape = "\n\r";
+
+        // flushes database
+        query("TRUNCATE places");
+            
+        // TODO skips empty values
+        
+        // reads file
+        while (($csv_data = fgetcsv($file , 100, $delimite, $enclosure)) !== FALSE)
+        {
+            //var_dump($csv_data);
+            // fills database with csv data
+            query("INSERT INTO places VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                $csv_data[0], 
+                $csv_data[1],
+                $csv_data[2],
+                $csv_data[3],
+                $csv_data[4],
+                $csv_data[5],
+                $csv_data[6],
+                $csv_data[7],
+                $csv_data[8],
+                $csv_data[9],
+                $csv_data[10],
+                $csv_data[11]
+                );
+        }
+
+        // closes files
+        fclose($file);
+    
+    }
+    
+?>

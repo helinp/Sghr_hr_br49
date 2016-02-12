@@ -1,0 +1,18 @@
+0.  The longest english word, somewhat usefull to determinate how much memory needs to be allocated and avoid seg fault.
+1.  It returns the CPU time and memory usage. 
+2.  16
+3.  I would say: "To optimize cpu and memory usage avoiding variable copy", but I don't really figure it out.  
+4.  The while read char by char the file until It doesn't get an EOF byte.
+ A must NULL check is done before reading the file.
+ It uses if else statements to exclude non alpha words (and optimise cpu time)
+ word[] index is increased until a NULL byte is found, which means we got the whole word from the file.
+ a time check is done before and after passing the word[index] in the check function to get the process time by substraction;  
+ mispelling variable is increased if bool function check return true. 
+ index is reinitialized to 0 to store the next word, char by char.
+ 
+5.  To avoid a seg fault if a misspelled word longer than 45 char is loaded. It helps to take of words with digits and avoids a non necessary spell check.
+6.  Const is used to declare a variable that may not be changed. You used it by convention (because oviously the checked word must not be changed) but, as it is not obligatory, I suspect you used it to help us and introduce us this new qualifier....  
+7.  I used a simple struct (char* word and a pointer) in addition of an hash table to make a separate chaining. I used the first 4 letters of the words to make the hash table. I know it is not the fastest way but I used it to avoid collisions and mathematical abstraction. 
+8.  Loading and unloading were 0.13, check 0.04 total 0.17... and I haven't implentated unload function yet!
+9.  Improved the hash table (I made the prefixes longer) which speeded up load and check function, I also speeded up the unload function saving in a separate array all node's numbers that are to be freed. 
+10. I did not fully understand why sprintf changes my initial value. Second point, I could optimise memory and cpu use (maybe using references and fgetc), but I feel unconfortable doing it alone. Certainly I'll make it once I'll get more experience! 

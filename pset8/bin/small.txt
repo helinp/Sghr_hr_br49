@@ -1,0 +1,5 @@
+BE	7973	Beloeil	Wallonie	WAL	Hainaut		Ath		50.5505	3.7348	4
+BE	7973	Beloeil Stambruges	Wallonie	WAL	Hainaut		Ath		50.5094	3.7162	4
+BE	1100	Postcheque							50.835	4.3647	1
+BE	1105	SOC							50.835	4.3647	1
+BE	4090	F.B.A. (Forces Belges en Allemagne)							50.638	5.5978	1
